@@ -2,7 +2,7 @@ import json
 
 import pandas as pd
 
-from constants import (     # TODO relative imports
+from constants import (
     CLEAN_JSON_FILEPATH,
     DATE_K
 )
