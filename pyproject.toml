@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "metacritic-games-scrape"
-version = "1.0.0"
+version = "1.0.1"
 description = "scrape metacritic.com for games w/ metascore"
 authors = ["atloo1"]
 license = "MIT"
