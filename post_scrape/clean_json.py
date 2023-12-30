@@ -1,7 +1,7 @@
 # python -m post_scrape.clean_json
 import json
 from datetime import datetime
-from metacritic_games_scrape.constants import (
+from constants import (
     CLEAN_JSON_FILEPATH,
     DATE_K,
     ESRB_D,

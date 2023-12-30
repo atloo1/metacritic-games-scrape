@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import spacy
 from tqdm import tqdm
-from metacritic_games_scrape.constants import(  # TODO relative imports
+from constants import(
     DESC_K,
     ESRB_K,
     TITLE_K,

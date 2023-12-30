@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from ..constants import (
+from constants import (
     CLEAN_JSON_FILEPATH,
     CRIT_SCORE_K,
     ESRB_K,
@@ -11,7 +11,7 @@ from ..constants import (
     PUB_K,
     USER_SCORE_K,
 )
-from .load_scrape_data import get_clean_data_df
+from load_scrape_data import get_clean_data_df
 
 df = get_clean_data_df()
 

@@ -2,7 +2,7 @@ import json
 
 import pandas as pd
 
-from metacritic_games_scrape.constants import (     # TODO relative imports
+from constants import (     # TODO relative imports
     CLEAN_JSON_FILEPATH,
     DATE_K
 )

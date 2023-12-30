@@ -5,9 +5,10 @@ START_URL = 'https://www.metacritic.com/browse/game/all/all/all-time/new/?page=1
 
 
 HERE_FILEPATH = Path(__file__).resolve()
-PROJ_ROOT_PATH = HERE_FILEPATH.parent.parent
-CLEAN_JSON_FILEPATH = PROJ_ROOT_PATH / 'metacritic_games_scrape/data_cleaned.json'
-SCRAPE_JSON_FILEPATH = PROJ_ROOT_PATH / 'metacritic_games_scrape/data.json'
+PROJ_ROOT_PATH = HERE_FILEPATH.parent
+POST_SCRAPE_PATH = PROJ_ROOT_PATH / 'post_scrape'
+CLEAN_JSON_FILEPATH = POST_SCRAPE_PATH / 'data_cleaned.json'
+SCRAPE_JSON_FILEPATH = POST_SCRAPE_PATH / 'data.json'
 
 # xpath & corresponding data fields
 CRIT_SCORE_K = 'critics_score'     # critics' AKA metascore

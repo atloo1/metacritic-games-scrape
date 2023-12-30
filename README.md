@@ -8,20 +8,20 @@ poetry install --without dev     # everything above
 poetry install  # if developing
 ```
 
-### reproduce data
+### [reproduce data](https://drive.google.com/drive/folders/1cbFvyNQ35JMsCnaBpy-t3rCZphIQwMFY?usp=sharing)
 ```
-cd <project-root>/metacritic_games_scrape/
-scrapy crawl metacritic_games -L DEBUG -O data.json --logfile logs.txt  # scrape
-
 cd <project-root>
-python -m post_scrape.clean_json    # process scrape data per writeup procedure
+scrapy crawl metacritic_games -L DEBUG -O post_scrape/data.json --logfile post_scrape/logs.txt
+python post_scrape/clean_json.py    # process scrape data per write-up procedure
 ```
-`data.json.gz`: scrape results as seen in writeup
+`data.json.gz`: scrape results used in write-up
 
 `logs.json.gz`: logs underlying `data.json.gz`
 
+`http_cache.tar.gz` (available upon request): scrapy HTTP cache underlying `data.json.gz`; use via `tar -xzf http_cache.tar.gz -C <project-root>/.scrapy/httpcache/`
+
 ### reproduce findings
-`clean_data_validation.ipynb`: manually inspect scrape output per writeup procedure
+`clean_data_validation.ipynb`: manually inspect scrape output per write-up procedure
 
 `table_2.py`: reproduce underlying data for table 2
 
@@ -33,20 +33,20 @@ python -m post_scrape.clean_json    # process scrape data per writeup procedure
 
 `fig_4.ipynb`: reproduce figure 4
 
-`tables_2_3_and_fig_5.ipynb`: reproduce underlying data for tables 2 & 3 + figure 5
+`tables_3_4_fig_5.ipynb`: reproduce underlying data for tables 3 & 4 + figure 5
 
-`tables_2_3_4_fig_5_pretty.ipynb`: reproduce tables 2, 3, & 4 + figure 5 as seen in writeup
+`tables_2_3_4_fig_5_pretty.ipynb`: reproduce tables 2, 3, & 4 + figure 5 as seen in write-up
 
-### reading materials
-`supplement_citations.pdf`: textual citations as seen in writeup
+### reading materials ([available upon request](https://drive.google.com/drive/folders/1m8wfo5qNFt-TyoxRlzkI1yu7kGcgnSNV?usp=sharing))
+`supplement_citations.pdf`: textual citations as seen in write-up
 
-`supplement_figures.pdf`: enlarged figures 1-5 as seen in writeup
+`supplement_figures.pdf`: enlarged figures from write-up
 
-`supplement_table_1.pdf`: table 1 as alluded to in writeup
+`supplement_table_1.pdf`: table 1 as alluded to in write-up
 
-`supplement_table_3.pdf`: complete table 3 as alluded to in writeup
+`supplement_table_3.pdf`: complete table 3 as alluded to in write-up
 
-`writeup.pdf`: a research-style paper presenting the work of this repository
+`write-up.pdf`: a research-style paper presenting the work of this repository
 
 ### utils
 `load_scrape_data.py`: instantiate DataFrame of cleaned scrape data
