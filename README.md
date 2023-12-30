@@ -55,13 +55,11 @@ python post_scrape/clean_json.py    # process scrape data per write-up procedure
 
 ### bash helpers
 ```
-cd <project-root>
-
 # scrape progress; 1 line = 1 page
-wc -l metacritic_games_scrape/data.json
+wc -l post_scrape/data.json
 
 # find a page in HTTP cache; next scrape will re-download it if deleted
 query_url="https://www.metacritic.com/game/halo-2/"  # set me
 query_str="{'url': '${query_url}'"
-find metacritic_games_scrape/.scrapy/httpcache/metacritic_games/ -type f -name "meta" -exec bash -c '[[ "$(head -n 1 "$0")" == "$1"* ]] && echo "File $0 starts with query_str"' {} "$query_str" \;
+find .scrapy/httpcache/metacritic_games/ -type f -name "meta" -exec bash -c '[[ "$(head -n 1 "$0")" == "$1"* ]] && echo "$0 starts with query_str"' {} "$query_str" \;
 ```
