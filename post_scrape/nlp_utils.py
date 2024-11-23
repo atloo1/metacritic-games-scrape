@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import spacy
 from tqdm import tqdm
-from constants import(
+
+from constants import (
     DESC_K,
     ESRB_K,
     TITLE_K,
@@ -63,7 +64,7 @@ def latent_features(
         topic_top_docs_idxs = topic_docs_vector.argsort()[-top_n:][::-1]
         topic_top_docs = docs.iloc[topic_top_docs_idxs].values
         topic_top_docs = '\n'.join(topic_top_docs)
-        
+
         topic_top_words_idxs = topic_words_vector.argsort()[-top_n:][::-1]
         topic_top_words = words[topic_top_words_idxs]
         topic_top_words = '\n'.join(topic_top_words)
@@ -103,11 +104,11 @@ def topic_model_breakdown_per_esrb(
     for esrb, group_df in data_df.groupby(ESRB_K):
         corpus = group_df[NORMED_DESC_K]
         docs = group_df[TITLE_K]
-        
+
         topics_docs_matrix, topics_words_matrix, words = model_fit_transform(corpus, doc_term_vectorizer, model)
         topics_df = latent_features(docs, top_n, topics_docs_matrix, topics_words_matrix, words)
         topics_df[ESRB_K] = esrb
-        
+
         dfs.append(topics_df)
 
     esrb_grouped_topics_df = pd.concat(dfs)

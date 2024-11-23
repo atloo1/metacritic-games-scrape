@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # START_URL = 'https://www.metacritic.com/browse/game/?page=1'    # metascored
-START_URL = 'https://www.metacritic.com/browse/game/all/all/all-time/new/?page=1'   # existing
+START_URL = 'https://www.metacritic.com/browse/game/all/all/all-time/new/?page=1'  # existing
 
 
 HERE_FILEPATH = Path(__file__).resolve()
@@ -11,20 +11,24 @@ CLEAN_JSON_FILEPATH = POST_SCRAPE_PATH / 'data_cleaned.json'
 SCRAPE_JSON_FILEPATH = POST_SCRAPE_PATH / 'data.json'
 
 # xpath & corresponding data fields
-CRIT_SCORE_K = 'critics_score'     # critics' AKA metascore
-CRIT_SCORE_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[4]/div/div[2]/div/div[1]/div[2]/div/div[1]/div/div/a//span/text()'
-DATE_K = 'date'     # initial release date
+CRIT_SCORE_K = 'critics_score'  # critics' AKA metascore
+CRIT_SCORE_XPATH = (
+    '/html/body/div[1]/div/div/div[2]/div[1]/div[4]/div/div[2]/div/div[1]/div[2]/div/div[1]/div/div/a//span/text()'
+)
+DATE_K = 'date'  # initial release date
 DATE_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div/div[2]/div[2]/div[1]//div [@class="c-gameDetails_ReleaseDate u-flexbox u-flexbox-row"]/span[2]/text()'
-DESC_K = 'description'   # promotional summary of the game
+DESC_K = 'description'  # promotional summary of the game
 DESC_XPATH = '/html/head/meta[28]/@content'
 DEV_K = 'developer'
 DEV_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div/div[2]/div[2]/div[2]/div [@class="c-gameDetails_Developer u-flexbox u-flexbox-row"]//li/text()'
-ESRB_K = 'esrb'     # ESRB content rating
+ESRB_K = 'esrb'  # ESRB content rating
 ESRB_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div/div[2]/div[1]/div//div [@class="c-productionDetailsGame_esrb_title u-inline-block g-outer-spacing-left-medium-fluid"]/span[1]/text()'
 GAME_PAGE_URLS_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/main/section/div[3]//div [@class="c-finderProductCard c-finderProductCard-game"]/a/@href'
 GENRE_K = 'genre'
 GENRES_K = 'genres'
-GENRES_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div//li [@class="c-genreList_item"]/div/a/span/text()'
+GENRES_XPATH = (
+    '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div//li [@class="c-genreList_item"]/div/a/span/text()'
+)
 NEXT_PAGE_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/main/section/div[4]/span[3]'
 NUM_CRIT_MIX_REVS_K = 'num_critic_mixed_reviews'
 NUM_CRIT_MIX_REVS_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[4]/div/div[2]/div/div[1]/div[2]/div/div[2]//div [@class="c-reviewsStats_neutralStats"]/span[2]/text()'
@@ -45,7 +49,9 @@ PLATS_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div/div[2]/div
 PUB_K = 'publisher'
 PUB_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[6]/div/div/div[2]/div[2]/div[2]/ div [@class="c-gameDetails_Distributor u-flexbox u-flexbox-row"]/span[2]/text()'
 USER_SCORE_K = 'users_score'
-USER_SCORE_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[4]/div/div[4]/div/div[1]/div[2]/div/div[1]/div/div/a//span/text()'
+USER_SCORE_XPATH = (
+    '/html/body/div[1]/div/div/div[2]/div[1]/div[4]/div/div[4]/div/div[1]/div[2]/div/div[1]/div/div/a//span/text()'
+)
 TITLE_K = 'title'
 TITLE_XPATH = '/html/body/div[1]/div/div/div[2]/div[1]/div[1]/div/div/div[2]/div[3]/div[1]/div/text()'
 URL_K = 'url'
@@ -54,7 +60,7 @@ URL_K = 'url'
 NEXT_PAGE_ENABLED_STR = '<span class="c-navigationPagination_item c-navigationPagination_item--next enabled">'
 NEXT_PAGE_DISABLED_STR = '<span class="c-navigationPagination_item c-navigationPagination_item--next disabled">'
 
-ESRB_D = {      # text label to numerical age
+ESRB_D = {  # text label to numerical age
     'Rated AO': '18+',
     'Rated E': '6+',
     'Rated E +10': '10+',
@@ -63,11 +69,11 @@ ESRB_D = {      # text label to numerical age
     'Rated T': '13+',
     'Rated RP': '?',
 }
-GAME_META_COLL_PARSE_D = {  # parsing dict for game metadata of type Collection 
+GAME_META_COLL_PARSE_D = {  # parsing dict for game metadata of type Collection
     GENRES_K: GENRES_XPATH,
     PLATS_K: PLATS_XPATH,
 }
-GAME_META_PARSE_D = {   # game metadata parsing dict
+GAME_META_PARSE_D = {  # game metadata parsing dict
     ESRB_K: ESRB_XPATH,
     DESC_K: DESC_XPATH,
     DEV_K: DEV_XPATH,
@@ -75,7 +81,7 @@ GAME_META_PARSE_D = {   # game metadata parsing dict
     DATE_K: DATE_XPATH,
     TITLE_K: TITLE_XPATH,
 }
-DESCRIPTIVE_KS = [    # most readable subset of fields
+DESCRIPTIVE_KS = [  # most readable subset of fields
     DATE_K,
     DESC_K,
     DEV_K,
@@ -93,18 +99,18 @@ NON_NEG_KS = {  # these have values ≥ 0
     NUM_USER_NEG_REVS_K,
     NUM_USER_POS_REVS_K,
     USER_SCORE_K,
-    }
-NUM_CRIT_REVS_KS = {    # grouped under number of critic reviews
+}
+NUM_CRIT_REVS_KS = {  # grouped under number of critic reviews
     NUM_CRIT_MIX_REVS_K,
     NUM_CRIT_NEG_REVS_K,
     NUM_CRIT_POS_REVS_K,
 }
-NUM_USER_REVS_KS = {    # grouped under number of user reviews
+NUM_USER_REVS_KS = {  # grouped under number of user reviews
     NUM_USER_MIX_REVS_K,
     NUM_USER_NEG_REVS_K,
     NUM_USER_POS_REVS_K,
 }
-PLATS_D = {  # pythonic names for platforms 
+PLATS_D = {  # pythonic names for platforms
     '3DS': '3ds',
     'Dreamcast': 'dreamcast',
     'DS': 'ds',
@@ -128,7 +134,7 @@ PLATS_D = {  # pythonic names for platforms
     'Xbox Series X': 'xbox_x',
     'Xbox': 'xbox',
 }
-REVS_PARSE_D = {    # reviews parsing dict
+REVS_PARSE_D = {  # reviews parsing dict
     CRIT_SCORE_K: CRIT_SCORE_XPATH,
     NUM_CRIT_MIX_REVS_K: NUM_CRIT_MIX_REVS_XPATH,
     NUM_CRIT_NEG_REVS_K: NUM_CRIT_NEG_REVS_XPATH,
@@ -142,7 +148,7 @@ SCORE_KS = {  # these have 0 ≤ values ≤ 100
     CRIT_SCORE_K,
     USER_SCORE_K,
 }
-SKIP_URLS = {   # relative URLs to skip
+SKIP_URLS = {  # relative URLs to skip
     # not games
     '/',  # https://www.metacritic.com/
     '/game/nintendo-ds/',

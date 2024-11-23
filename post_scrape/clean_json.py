@@ -1,6 +1,16 @@
-# python -m post_scrape.clean_json
+"""
+postprocess scrape output into JSON dataset:
+dictionary w/ URL key & value dictionary of attributes
+
+Run with:
+```
+python -m post_scrape.clean_json
+```
+"""
+
 import json
 from datetime import datetime
+
 from constants import (
     CLEAN_JSON_FILEPATH,
     DATE_K,
@@ -23,7 +33,7 @@ from constants import (
 with open(SCRAPE_JSON_FILEPATH) as f:
     game_dicts = json.load(f)
 
-# list of dicts -> dict
+# list of dicts → dict
 games_dict = dict()
 
 # map, type, & derive certain fields
@@ -52,12 +62,12 @@ for game_dict in game_dicts:
         except ValueError:
             raise ValueError(f'{url} date {date} not castable to datetime')
 
-    # map 'Rated E' -> '≥6' years old, etc.
+    # map 'Rated E' → '≥6' years old, etc.
     esrb = game_dict.pop(ESRB_K)
     esrb = ESRB_D[esrb] if esrb is not None else esrb
     game_dict[ESRB_K] = esrb
-    
-    # genres -> genre b/c ≤ 1 genre per game
+
+    # genres → genre b/c ≤ 1 genre per game
     genres = game_dict.pop(GENRES_K)
     if not genres:
         game_dict[GENRE_K] = None
@@ -70,18 +80,15 @@ for game_dict in game_dicts:
     # compute summary stats
     for num_rev_ks in [NUM_CRIT_REVS_KS, NUM_USER_REVS_KS]:
         num_rev_k = next(iter(num_rev_ks))
-        
+
         if '_critic_' in num_rev_k:
             sum_k = NUM_CRIT_REVS_K
         elif '_user_' in num_rev_k:
             sum_k = NUM_USER_REVS_K
         else:
             raise ValueError(f'unhandled key {num_rev_k}')
-        
-        nums_revs = [
-            game_dict[num_rev_k] if game_dict[num_rev_k] is not None else 0
-            for num_rev_k in num_rev_ks
-        ]
+
+        nums_revs = [game_dict[num_rev_k] if game_dict[num_rev_k] is not None else 0 for num_rev_k in num_rev_ks]
         game_dict[sum_k] = sum(nums_revs)
 
     # 1 hot encoded 'available on platform' field
@@ -100,7 +107,7 @@ incomplete = True
 with open(CLEAN_JSON_FILEPATH, 'w') as f:
     json.dump(games_dict, f)
     incomplete = False
-    
+
 if incomplete:
     print('FAILURE: no clean JSON made')
 else:
