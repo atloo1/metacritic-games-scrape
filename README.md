@@ -99,10 +99,6 @@ poetry run pre-commit install
 wc -l post_scrape/data.json
 ```
 
-#### find a page in HTTP cache; delete it to re-download it next scrape
-
-wc -l post_scrape/data.json
-
 #### find a page in HTTP cache; next scrape will re-download it if deleted
 
 ```
