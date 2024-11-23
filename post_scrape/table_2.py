@@ -1,17 +1,16 @@
 # python -m metacritic_games_scrape.post_scrape.table_2
 
 import pandas as pd
+from load_scrape_data import get_clean_data_df
 
 from constants import (
-    CLEAN_JSON_FILEPATH,
     CRIT_SCORE_K,
-    ESRB_K,
     DATE_K,
     DEV_K,
+    ESRB_K,
     PUB_K,
     USER_SCORE_K,
 )
-from load_scrape_data import get_clean_data_df
 
 df = get_clean_data_df()
 
@@ -19,7 +18,7 @@ df = get_clean_data_df()
 crit_score_mask = pd.notna(df[CRIT_SCORE_K])
 user_score_mask = pd.notna(df[USER_SCORE_K])
 crit_and_user_score_mask = crit_score_mask & user_score_mask
-num_both_critiques = len(df.loc[crit_and_user_score_mask])  
+num_both_critiques = len(df.loc[crit_and_user_score_mask])
 print(f'num_both_critiques: {num_both_critiques}')
 
 # has any criticism

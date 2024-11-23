@@ -1,0 +1,85 @@
+repos:
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.8.4
+    # https://python-poetry.org/docs/pre-commit-hooks/
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+
+  - repo: https://github.com/pre-commit/pre-commit
+    rev: v4.0.1
+    # https://github.com/pre-commit/pre-commit/blob/main/.pre-commit-hooks.yaml
+    hooks:
+      - id: validate_manifest
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.13.0
+    # https://github.com/pre-commit/mirrors-mypy?tab=readme-ov-file#using-mypy-with-pre-commit
+    hooks:
+      - id: mypy
+        args:
+          - --ignore-missing-imports
+          - --warn-unused-ignores
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
+    # https://github.com/asottile/pyupgrade?tab=readme-ov-file#as-a-pre-commit-hook
+    hooks:
+      - id: pyupgrade
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    # https://docs.astral.sh/ruff/settings/
+    hooks:
+      - id: ruff
+        types_or:
+          - jupyter
+          - pyi
+          - python
+        args:
+          - --fix
+      - id: ruff-format
+        types_or:
+          - jupyter
+          - pyi
+          - python
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    # https://pre-commit.com/hooks.html
+    hooks:
+      - id: check-added-large-files
+        exclude: post_scrape/tables_2_3_4_fig_5_pretty.ipynb
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-aws-credentials
+        args:
+          - --allow-missing-credentials
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: name-tests-test
+      - id: mixed-line-ending
+      - id: pretty-format-json
+        args:
+          - --autofix
+      - id: sort-simple-yaml
+      - id: trailing-whitespace
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.19
+    hooks:
+      - id: mdformat
+
+  - repo: https://github.com/atloo1/check-pyproject-incremented
+    rev: 111ead31714999c28bbee9a987e4d9977940fa4f
+    # https://github.com/atloo1/check-pyproject-incremented/?tab=readme-ov-file#check-pyproject-incremented
+    hooks:
+      - id: check-pyproject-incremented

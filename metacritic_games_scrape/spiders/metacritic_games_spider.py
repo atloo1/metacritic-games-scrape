@@ -6,8 +6,8 @@ from scrapy.selector import Selector
 from constants import (
     DATE_K,
     DESC_K,
-    GAME_META_PARSE_D,
     GAME_META_COLL_PARSE_D,
+    GAME_META_PARSE_D,
     GAME_PAGE_URLS_XPATH,
     NEXT_PAGE_DISABLED_STR,
     NEXT_PAGE_ENABLED_STR,
@@ -22,13 +22,15 @@ from constants import (
 
 class MainSpider(Spider):
     name = 'metacritic_games'
-    start_urls = [START_URL,]
+    start_urls = [
+        START_URL,
+    ]
     # galleries_d = dict()    # debug duplicate URLs more granularly than DUPEFILTER_DEBUG
 
     def parse_game_page(self, response):
         url = response.url
         game_d = {URL_K: url}
-        
+
         # add metadata str values to dict
         for k, xpath in GAME_META_PARSE_D.items():
             v = Selector(text=response.body).xpath(xpath).get()
@@ -40,12 +42,12 @@ class MainSpider(Spider):
                 if k == DATE_K and 'NaN' in v:
                     # self.logger.debug(f'{url} {k}: {v} overwritten to None')
                     v = None
-                
+
                 # false positives, e.g. https://www.metacritic.com/game/pimania/
                 elif k == DESC_K and v == 'loaded':
                     # self.logger.debug(f'{url} {k}: {v} overwritten to None')
                     v = None
-            
+
             # else:
             #     self.logger.debug(f'{url} {k} is None')
 
@@ -56,7 +58,7 @@ class MainSpider(Spider):
         for k, xpath in GAME_META_COLL_PARSE_D.items():
             vs = Selector(text=response.body).xpath(xpath).getall()
             # self.logger.debug(f'{url} {k}: {vs}')
-            vs = sorted(html.unescape(v).strip() for v in vs)      # sort for convenient comparison 
+            vs = sorted(html.unescape(v).strip() for v in vs)  # sort for convenient comparison
             # self.logger.debug(f'{url} {k}: {vs}')
             game_d[k] = vs
 
@@ -70,10 +72,10 @@ class MainSpider(Spider):
                     v = v.replace('.', '')  # '1.2' -> '12' for CRIT_SCORE_K
                 v = None if v == 'tbd' else int(v)
                 # self.logger.debug(f'{url} {k}: {v}')
-            
+
             # else:
-                # self.logger.debug(f'{url} {k} is None')
-            
+            # self.logger.debug(f'{url} {k} is None')
+
             # self.logger.debug(f'{url} {k}: {v}')
             game_d[k] = v
 
@@ -88,7 +90,7 @@ class MainSpider(Spider):
         for game_page_url in game_page_urls:
             if game_page_url not in SKIP_URLS:
                 yield response.follow(game_page_url, self.parse_game_page)
-        
+
         # paginate gallery for new game page URLs
         next_page_arrow_selector = Selector(text=response.body).xpath(NEXT_PAGE_XPATH).get()
         next_page_enabled = next_page_arrow_selector.startswith(NEXT_PAGE_ENABLED_STR)
