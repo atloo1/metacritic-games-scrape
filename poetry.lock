@@ -2220,6 +2220,11 @@ files = [
     {file = "matplotlib-3.9.3-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:10d3e5c7a99bd28afb957e1ae661323b0800d75b419f24d041ed1cc5d844a764"},
     {file = "matplotlib-3.9.3-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:816a966d5d376bf24c92af8f379e78e67278833e4c7cbc9fa41872eec629a060"},
     {file = "matplotlib-3.9.3-cp39-cp39-win_amd64.whl", hash = "sha256:3fb0b37c896172899a4a93d9442ffdc6f870165f59e05ce2e07c6fded1c15749"},
+    {file = "matplotlib-3.9.3-pp39-pypy39_pp73-macosx_10_15_x86_64.whl", hash = "sha256:5f2a4ea08e6876206d511365b0bc234edc813d90b930be72c3011bbd7898796f"},
+    {file = "matplotlib-3.9.3-pp39-pypy39_pp73-macosx_11_0_arm64.whl", hash = "sha256:9b081dac96ab19c54fd8558fac17c9d2c9cb5cc4656e7ed3261ddc927ba3e2c5"},
+    {file = "matplotlib-3.9.3-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0a0a63cb8404d1d1f94968ef35738900038137dab8af836b6c21bb6f03d75465"},
+    {file = "matplotlib-3.9.3-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:896774766fd6be4571a43bc2fcbcb1dcca0807e53cab4a5bf88c4aa861a08e12"},
+    {file = "matplotlib-3.9.3.tar.gz", hash = "sha256:cd5dbbc8e25cad5f706845c4d100e2c8b34691b412b93717ce38d8ae803bcfa5"},
 ]
 
 [package.dependencies]
@@ -3840,13 +3845,13 @@ test = ["array-api-strict", "asv", "gmpy2", "hypothesis (>=6.30)", "mpmath", "po
 
 [[package]]
 name = "scrapy"
-version = "2.12.0"
+version = "2.13.4"
 description = "A high-level Web Crawling and Web Scraping framework"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "Scrapy-2.12.0-py2.py3-none-any.whl", hash = "sha256:c33e2dc7da42e727390bacb32dd9938a54ac210fa71972b5c392754f478669cd"},
-    {file = "scrapy-2.12.0.tar.gz", hash = "sha256:d66d6e76009b12447604196875a463b61d10721140032a8084a0a52df7f4788f"},
+    {file = "scrapy-2.13.4-py3-none-any.whl", hash = "sha256:9bf36700aefa4983cc48b2cb0e1564161a340e19f73862778e2ed44ec5bbde6a"},
+    {file = "scrapy-2.13.4.tar.gz", hash = "sha256:e09bce40c56b56f9f86b0d078a0e5cdd08283c83076170ce7a8eec7189ac2493"},
 ]
 
 [package.dependencies]
@@ -3859,15 +3864,15 @@ lxml = ">=4.6.0"
 packaging = "*"
 parsel = ">=1.5.0"
 protego = ">=0.1.15"
-PyDispatcher = {version = ">=2.0.5", markers = "platform_python_implementation == \"CPython\""}
-pyOpenSSL = ">=22.0.0"
-PyPyDispatcher = {version = ">=2.1.0", markers = "platform_python_implementation == \"PyPy\""}
+pydispatcher = {version = ">=2.0.5", markers = "platform_python_implementation == \"CPython\""}
+pyopenssl = ">=22.0.0"
+pypydispatcher = {version = ">=2.1.0", markers = "platform_python_implementation == \"PyPy\""}
 queuelib = ">=1.4.2"
 service-identity = ">=18.1.0"
 tldextract = "*"
-Twisted = ">=21.7.0"
+twisted = ">=21.7.0,<=25.5.0"
 w3lib = ">=1.17.0"
-"zope.interface" = ">=5.1.0"
+zope-interface = ">=5.1.0"
 
 [[package]]
 name = "scrapy-user-agents"
